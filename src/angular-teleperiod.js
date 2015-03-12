@@ -1,8 +1,10 @@
 (function() {
     'use strict';
 
-    angular.module('prTeleperiodDirective', []).
+    angular.module('prTeleperiod', []).
     directive('prTeleperiod', function () {
+
+        console.log('directive loaded');
 
         return {
             restrict: 'AE',
@@ -11,7 +13,7 @@
             },
             template: '<svg></svg>',
             replace: true,
-            controller: ['$scope', '$http', function($scope, $http) {
+            controller: ['$scope', function($scope) {
 
 
             }]

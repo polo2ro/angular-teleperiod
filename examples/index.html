@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html ng-app="teleperiodExample">
+    <head>
+        <meta charset="utf-8">
+        <title>Teleperiod sample</title>
+        <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" type="text/css" href="../bower_components/teleperiod/dist/teleperiod.min.css" />
+
+
+        <script type="text/javascript" src="../bower_components/d3/d3.min.js"></script>
+        <script type="text/javascript" src="../bower_components/q/q.js"></script>
+        <script type="text/javascript" src="../bower_components/angular/angular.min.js"></script>
+        <script type="text/javascript" src="../bower_components/angular-animate/angular-animate.min.js"></script>
+        <script type="text/javascript" src="../bower_components/angular-strap/dist/angular-strap.min.js"></script>
+        <script type="text/javascript" src="../bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+        <script type="text/javascript" src="../bower_components/teleperiod/dist/teleperiod.min.js"></script>
+
+        <script type="text/javascript" src="../src/angular-teleperiod.js"></script>
+        <script type="text/javascript" src="./app.js"></script>
+
+    </head>
+
+    <body ng-controller="MainCtrl">
+
+        <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+          <div class="container">
+            <div class="navbar-header">
+              <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a href="/" class="navbar-brand">Angular-Teleperiod</a>
+            </div>
+
+          </div>
+        </header>
+
+        <div class="container bs-docs-container">
+
+            <div class="row">
+                <pr-teleperiod />
+            </div>
+
+            <form name="selection" ng-controller="SelectionCtrl" class="col-md-6" role="form">
+                <h3>Selection</h3>
+
+                <div class="form-inline  form-group">
+                    <label class="control-label"><i class="fa fa-calendar"></i> Start date</label><br>
+                    <div class="form-group">
+                        <input size="15" class="form-control" ng-model="dtstart" data-autoclose="1" placeholder="Date" bs-datepicker type="text">
+                    </div>
+                    <div class="form-group">
+                        <input size="8" class="form-control" ng-model="dtstart" data-autoclose="1" placeholder="Time" bs-timepicker type="text">
+                    </div>
+                </div>
+
+                <div class="form-inline  form-group">
+                    <label class="control-label"><i class="fa fa-calendar"></i> End date</label><br>
+                    <div class="form-group">
+                        <input size="15" class="form-control" ng-model="dtend" data-autoclose="1" placeholder="Date" bs-datepicker type="text">
+                    </div>
+                    <div class="form-group">
+                        <input size="8" class="form-control" ng-model="dtend" data-autoclose="1" placeholder="Time" bs-timepicker type="text">
+                    </div>
+                </div>
+
+            </form>
+
+            <div class="col-md-6">
+                <h3>Details</h3>
+
+
+                <div class="details"></div>
+            </div>
+        </div>
+
+    </body>
+</html>
