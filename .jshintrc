@@ -17,5 +17,18 @@
     "strict": true,
     "trailing": true,
     "smarttabs": true,
-    "globals": { "angular": false, "window": false, "define": false, "describe": false, "it": false, "beforeEach": false, "context": false, "expect": false, "spyOn": false }
+    "globals": {
+        "angular": false,
+        "window": false,
+        "define": false,
+        "describe": false,
+        "it": false,
+        "beforeEach": false,
+        "context": false,
+        "expect": false,
+        "spyOn": false,
+        "Q": false,
+        "Teleperiod": false,
+        "d3": false
+    }
 }
