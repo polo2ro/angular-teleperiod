@@ -18,7 +18,7 @@
       };
     })
 
-    .directive('prTeleperiod', function () {
+    .directive('prTeleperiod', function() {
 
         return {
             restrict: 'E',
@@ -30,26 +30,33 @@
                 scope.teleperiod = new Teleperiod({
                     object: d3.select(scope.svg[0]),
 
-                    focusDate: new Date(2014, 11, 25),
+                    focusDate: attrs.focusDate || new Date(),
 
                     workingtimes: function(interval) {
 
-                        return Q.fcall(function () {
-                            // return working times (selectable periods)
+                        var deferred = Q.defer();
 
-                            var workingtimes = [];
-                            return workingtimes;
-                        });
+                        var fn = scope[attrs.workingtimes];
+                        if (fn === undefined) {
+                            deferred.reject();
+                        } else {
+                            deferred.resolve(fn(interval));
+                        }
+
+                        return deferred.promise;
                     },
 
                     events: function(interval) {
+                        var deferred = Q.defer();
 
-                        return Q.fcall(function () {
-                            // return other events displayed on the graph
+                        var fn = scope[attrs.events];
+                        if (fn === undefined) {
+                            deferred.reject();
+                        } else {
+                            deferred.resolve(fn(interval));
+                        }
 
-                            var events = [];
-                            return events;
-                        });
+                        return deferred.promise;
                     },
 
                     onUpdated: function(selection) {
