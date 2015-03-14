@@ -40,9 +40,12 @@
 
         <div class="container bs-docs-container">
 
-            <div class="row">
-                <pr-teleperiod workingtimes="loadWorkingTimes" events="loadEvents" />
+
+            <div tp-teleperiod>
+                <tp-period-picker workingtimes="loadWorkingTimes" events="loadEvents"></tp-period-picker>
+                <tp-timeline name="Scolar vacations" events="loadVacationsPreview"></tp-timeline>
             </div>
+
 
             <form name="selection" ng-controller="SelectionCtrl" role="form">
                 <h3>Selection</h3>

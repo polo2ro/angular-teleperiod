@@ -1,71 +1,117 @@
 (function() {
     'use strict';
 
-    angular.module('prTeleperiod', [])
+    angular.module('tpTeleperiod', [])
 
-    .directive('prScopeElement', function () {
+    .directive('tpScopeElement', function () {
       return {
-
         restrict: 'A',
-
         compile: function compile() {
             return {
                 pre: function preLink(scope, iElement, iAttrs) {
-                    scope[iAttrs.prScopeElement] = iElement;
+                    scope[iAttrs.tpScopeElement] = iElement;
                 }
             };
         }
       };
     })
 
-    .directive('prTeleperiod', function() {
+    .directive('tpTeleperiod', function() {
+
+        return {
+            restrict: 'AE',
+            controller: function controller() {
+                return function(scope, element) {
+
+                }
+            }
+        };
+    })
+
+    .directive('tpPeriodPicker', function() {
 
         return {
             restrict: 'E',
-            template: '<svg pr-scope-element="svg"></svg>',
             replace: true,
+            require: '^tpTeleperiod',
+            template: '<svg tp-scope-element="svg"></svg>',
+            compile: function compile() {
 
-            link: function(scope, element, attrs) {
+                return function compile(scope, iElement, attrs, teleperiodScope) {
 
-                scope.teleperiod = new Teleperiod({
-                    object: d3.select(scope.svg[0]),
 
-                    focusDate: attrs.focusDate || new Date(),
+                    teleperiodScope.d3Svg = d3.select(scope.svg[0]);
+                    scope.focusDate = attrs.focusDate || new Date();
 
-                    workingtimes: function(interval) {
 
-                        var deferred = Q.defer();
+                    teleperiodScope.teleperiod = new Teleperiod({
+                        object: teleperiodScope.d3Svg,
+                        focusDate: scope.focusDate,
 
-                        var fn = scope[attrs.workingtimes];
-                        if (fn === undefined) {
-                            deferred.reject();
-                        } else {
-                            deferred.resolve(fn(interval));
+                        workingtimes: function(interval) {
+
+                            var deferred = Q.defer();
+
+                            var fn = scope[attrs.workingtimes];
+                            if (fn === undefined) {
+                                deferred.reject();
+                            } else {
+                                deferred.resolve(fn(interval));
+                            }
+
+                            return deferred.promise;
+                        },
+
+                        events: function(interval) {
+                            var deferred = Q.defer();
+
+                            var fn = scope[attrs.events];
+                            if (fn === undefined) {
+                                deferred.reject();
+                            } else {
+                                deferred.resolve(fn(interval));
+                            }
+
+                            return deferred.promise;
+                        },
+
+                        onUpdated: function(selection) {
+
                         }
+                    });
 
-                        return deferred.promise;
-                    },
 
-                    events: function(interval) {
-                        var deferred = Q.defer();
+                    teleperiodScope.teleperiod.draw();
+                };
 
-                        var fn = scope[attrs.events];
-                        if (fn === undefined) {
-                            deferred.reject();
-                        } else {
-                            deferred.resolve(fn(interval));
-                        }
+            }
+        };
+    })
 
-                        return deferred.promise;
-                    },
+    .directive('tpTimeline', function() {
 
-                    onUpdated: function(selection) {
+        return {
+            restrict: 'E',
+            require: '^tpTeleperiod',
+            link: function(scope, element, attrs, teleperiodScope) {
 
+                console.log(attrs.name);
+
+                var timeline = new Timeline(attrs.name, function(interval) {
+
+                    var deferred = Q.defer();
+
+                    var fn = scope[attrs.events];
+                    if (fn === undefined) {
+                        deferred.reject();
+                    } else {
+                        deferred.resolve(fn(interval));
                     }
+
+                    return deferred.promise;
                 });
 
-
-                scope.teleperiod.draw();
+                teleperiodScope.teleperiod.addTimeLine(timeline);
             }
         };
     });

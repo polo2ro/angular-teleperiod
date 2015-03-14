@@ -1,4 +1,4 @@
-var app = angular.module('teleperiodExample', ['mgcrea.ngStrap', 'prTeleperiod']);
+var app = angular.module('teleperiodExample', ['mgcrea.ngStrap', 'tpTeleperiod']);
 
 
 app.controller('MainCtrl', function($scope) {
@@ -38,10 +38,33 @@ app.controller('MainCtrl', function($scope) {
     };
 
 
+    function addEvent(interval, events, event)
+    {
+        if (interval.from < event.dtend && interval.to > event.dtstart) {
+            events.push(event);
+        }
+    }
+
+
 
     $scope.loadEvents = function(interval) {
         return [];
     };
+
+    $scope.loadVacationsPreview = function(interval) {
+
+
+        var events = [];
+        var christmas = {
+            summary: 'Christmas vacations',
+            dtstart: new Date(2014, 11, 20, 8, 0, 0),
+            dtend: new Date(2015, 0, 5, 19, 0, 0)
+        };
+
+        addEvent(interval, events, christmas);
+
+        return events;
+    }
 });
 
 
