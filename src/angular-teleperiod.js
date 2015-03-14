@@ -1,6 +1,9 @@
 (function() {
     'use strict';
 
+
+
+
     angular.module('tpTeleperiod', [])
 
     .directive('tpScopeElement', function () {
@@ -20,10 +23,25 @@
 
         return {
             restrict: 'AE',
-            controller: function controller() {
-                return function(scope, element) {
+            controller: function controller($scope) {
 
-                }
+                /**
+                 * @param {string} method name in scope, get from the directive attribute
+                 * @return {Promise}
+                 */
+                this.getPromisedData = function getPromisedData(method, interval) {
+                    var deferred = Q.defer();
+
+                    var fn = $scope[method];
+                    if (fn === undefined) {
+                        deferred.reject();
+                    } else {
+                        deferred.resolve(fn(interval));
+                    }
+
+                    return deferred.promise;
+                };
+
             }
         };
     })
@@ -49,30 +67,11 @@
                         focusDate: scope.focusDate,
 
                         workingtimes: function(interval) {
-
-                            var deferred = Q.defer();
-
-                            var fn = scope[attrs.workingtimes];
-                            if (fn === undefined) {
-                                deferred.reject();
-                            } else {
-                                deferred.resolve(fn(interval));
-                            }
-
-                            return deferred.promise;
+                            return teleperiodScope.getPromisedData(attrs.workingtimes, interval);
                         },
 
                         events: function(interval) {
-                            var deferred = Q.defer();
-
-                            var fn = scope[attrs.events];
-                            if (fn === undefined) {
-                                deferred.reject();
-                            } else {
-                                deferred.resolve(fn(interval));
-                            }
-
-                            return deferred.promise;
+                            return teleperiodScope.getPromisedData(attrs.events, interval);
                         },
 
                         onUpdated: function(selection) {
@@ -95,20 +94,8 @@
             require: '^tpTeleperiod',
             link: function(scope, element, attrs, teleperiodScope) {
 
-                console.log(attrs.name);
-
                 var timeline = new Timeline(attrs.name, function(interval) {
-
-                    var deferred = Q.defer();
-
-                    var fn = scope[attrs.events];
-                    if (fn === undefined) {
-                        deferred.reject();
-                    } else {
-                        deferred.resolve(fn(interval));
-                    }
-
-                    return deferred.promise;
+                    return teleperiodScope.getPromisedData(attrs.events, interval);
                 });
 
                 teleperiodScope.teleperiod.addTimeLine(timeline);
