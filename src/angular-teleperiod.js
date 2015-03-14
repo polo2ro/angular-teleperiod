@@ -61,20 +61,6 @@
 
                     onUpdated: function(selection) {
 
-                        var dtstart = selection.dtstart ? selection.dtstart.toLocaleString() : null;
-                        var dtend = selection.dtend ? selection.dtend.toLocaleString() : null;
-
-                        d3.select('#dtstart').attr('value', dtstart);
-                        d3.select('#dtend').attr('value', dtend);
-
-                        d3.select('.duration').text(selection.getDuration()+' ms');
-                        var details = d3.select('.details');
-                        details.selectAll('p').remove();
-
-                        var arr = selection.getValidPeriods();
-                        for(var i=0; i< arr.length; i++) {
-                            details.append('p').text('From '+arr[i].dtstart.toLocaleString()+ ' to '+arr[i].dtend.toLocaleString());
-                        }
                     }
                 });
 
