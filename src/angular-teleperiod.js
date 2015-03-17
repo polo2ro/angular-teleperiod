@@ -75,7 +75,9 @@
                         },
 
                         onUpdated: function(selection) {
-
+                            scope[attrs.dtstart] = selection.dtstart;
+                            scope[attrs.dtend] = selection.dtend;
+                            scope.$apply();
                         }
                     });
 
