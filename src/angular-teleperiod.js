@@ -83,6 +83,30 @@
 
 
                     teleperiodScope.teleperiod.draw();
+
+
+                    scope.$watch(attrs.dtstart, function(newValue) {
+
+                        var selection = teleperiodScope.teleperiod.selection;
+
+                        if (newValue) {
+                            selection.dtstart = newValue;
+                            selection.removeOverlay();
+                            selection.highlightPeriods();
+                        }
+                    }, true);
+
+                    scope.$watch(attrs.dtend, function(newValue) {
+
+                        var selection = teleperiodScope.teleperiod.selection;
+
+                        if (newValue) {
+                            selection.dtend = newValue;
+                            selection.removeOverlay();
+                            selection.highlightPeriods();
+                        }
+                    }, true);
+
                 };
 
             }
