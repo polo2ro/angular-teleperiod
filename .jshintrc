@@ -29,6 +29,7 @@
         "spyOn": false,
         "Q": false,
         "Teleperiod": false,
+        "Timeline": false,
         "d3": false
     }
 }
