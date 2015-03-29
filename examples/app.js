@@ -4,6 +4,7 @@ var app = angular.module('teleperiodExample', ['mgcrea.ngStrap', 'tpTeleperiod']
 app.controller('MainCtrl', function($scope) {
     'use strict';
 
+
     $scope.loadWorkingTimes = function(interval) {
 
         var workingtimes = [];
@@ -64,7 +65,7 @@ app.controller('MainCtrl', function($scope) {
         addEvent(interval, events, christmas);
 
         return events;
-    }
+    };
 });
 
 

@@ -46,7 +46,7 @@
         };
     })
 
-    .directive('tpPeriodPicker', function() {
+    .directive('tpPeriodPicker', function($parse) {
 
         return {
             restrict: 'E',
@@ -75,8 +75,8 @@
                         },
 
                         onUpdated: function(selection) {
-                            scope[attrs.dtstart] = selection.dtstart;
-                            scope[attrs.dtend] = selection.dtend;
+                            $parse(attrs.dtstart).assign(scope, selection.dtstart);
+                            $parse(attrs.dtend).assign(scope, selection.dtend);
                             scope.$apply();
                         }
                     });
