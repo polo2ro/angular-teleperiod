@@ -16,12 +16,14 @@ app.controller('MainCtrl', function($scope) {
                 var am = {};
                 var pm = {};
 
+                am.summary = 'Morning work schedule';
                 am.dtstart = new Date(loop);
                 am.dtstart.setHours(9, 0, 0);
 
                 am.dtend = new Date(loop);
                 am.dtend.setHours(12, 0, 0);
 
+                pm.summary = 'Afternoon work schedule';
                 pm.dtstart = new Date(loop);
                 pm.dtstart.setHours(13, 0, 0);
 
@@ -65,6 +67,14 @@ app.controller('MainCtrl', function($scope) {
         addEvent(interval, events, christmas);
 
         return events;
+    };
+
+
+    $scope.test = 'TEST';
+
+    $scope.buzz = {
+        dtstart:  new Date(2015, 4, 8, 8, 0, 0) ,
+        dtend:  new Date(2015, 4, 9, 8, 0, 0)
     };
 });
 

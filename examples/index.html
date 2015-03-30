@@ -42,31 +42,30 @@
 
 
             <div tp-teleperiod>
-                <tp-period-picker workingtimes="loadWorkingTimes" events="loadEvents" dtstart="dtstart" dtend="dtend"></tp-period-picker>
+                <tp-period-picker workingtimes="loadWorkingTimes" events="loadEvents" dtstart="selected.dtstart" dtend="selected.dtend"></tp-period-picker>
                 <tp-timeline name="Scolar vacations" events="loadVacationsPreview"></tp-timeline>
             </div>
 
-
-            <form name="selection" ng-controller="SelectionCtrl" role="form">
+            <form name="selection" role="form">
                 <h3>Selection</h3>
 
                 <div class="form-inline  form-group">
                     <label class="control-label"><i class="fa fa-calendar"></i> Start date</label><br>
                     <div class="form-group">
-                        <input size="15" class="form-control" ng-model="dtstart" data-autoclose="1" placeholder="Date" bs-datepicker type="text">
+                        <input size="15" class="form-control" ng-model="selected.dtstart" data-autoclose="1" placeholder="Date" bs-datepicker type="text">
                     </div>
                     <div class="form-group">
-                        <input size="8" class="form-control" ng-model="dtstart" data-autoclose="1" placeholder="Time" bs-timepicker type="text">
+                        <input size="8" class="form-control" ng-model="selected.dtstart" data-autoclose="1" placeholder="Time" bs-timepicker type="text">
                     </div>
                 </div>
 
                 <div class="form-inline  form-group">
                     <label class="control-label"><i class="fa fa-calendar"></i> End date</label><br>
                     <div class="form-group">
-                        <input size="15" class="form-control" ng-model="dtend" data-autoclose="1" placeholder="Date" bs-datepicker type="text">
+                        <input size="15" class="form-control" ng-model="selected.dtend" data-autoclose="1" placeholder="Date" bs-datepicker type="text">
                     </div>
                     <div class="form-group">
-                        <input size="8" class="form-control" ng-model="dtend" data-autoclose="1" placeholder="Time" bs-timepicker type="text">
+                        <input size="8" class="form-control" ng-model="selected.dtend" data-autoclose="1" placeholder="Time" bs-timepicker type="text">
                     </div>
                 </div>
 

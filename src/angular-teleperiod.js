@@ -62,6 +62,12 @@
                     scope.focusDate = attrs.focusDate || new Date();
 
 
+                    function updateScope(selection) {
+                        $parse(attrs.dtstart).assign(scope, selection.dtstart);
+                        $parse(attrs.dtend).assign(scope, selection.dtend);
+                    }
+
+
                     teleperiodScope.teleperiod = new Teleperiod({
                         object: teleperiodScope.d3Svg,
                         focusDate: scope.focusDate,
@@ -75,9 +81,9 @@
                         },
 
                         onUpdated: function(selection) {
-                            $parse(attrs.dtstart).assign(scope, selection.dtstart);
-                            $parse(attrs.dtend).assign(scope, selection.dtend);
-                            scope.$apply();
+                            scope.$apply(function() {
+                                updateScope(selection);
+                            });
                         }
                     });
 
