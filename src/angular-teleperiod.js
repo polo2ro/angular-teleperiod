@@ -87,8 +87,7 @@
                         }
                     });
 
-
-                    teleperiodScope.teleperiod.draw();
+                    setTimeout(teleperiodScope.teleperiod.draw, 0);
 
 
                     scope.$watch(attrs.dtstart, function(newValue) {
@@ -131,6 +130,7 @@
                 });
 
                 teleperiodScope.teleperiod.addTimeLine(timeline);
+                // teleperiodScope.teleperiod.draw();
             }
         };
     });
