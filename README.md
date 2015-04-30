@@ -9,7 +9,7 @@ Directives
 ```html
 <div tp-teleperiod>
     <tp-period-picker workingtimes="loadWorkingTimes" events="loadEvents" dtstart="selected.dtstart" dtend="selected.dtend"></tp-period-picker>
-    <tp-timeline name="Scolar vacations" events="loadVacationsPreview"></tp-timeline>
+    <tp-timeline name="Scholar holidays" events="loadVacationsPreview"></tp-timeline>
 </div>
 ```
 
