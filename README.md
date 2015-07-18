@@ -35,6 +35,9 @@ A scope property to update with the start date of the selection
 `dtend`:
 A scope property to update with the end date of the selection
 
+`periods`:
+Optional property to update with the list of selected periods
+
 
 __On a tp-timeline tag__
 

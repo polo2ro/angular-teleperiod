@@ -65,6 +65,10 @@
                     function updateScope(selection) {
                         $parse(attrs.dtstart).assign(scope, selection.dtstart);
                         $parse(attrs.dtend).assign(scope, selection.dtend);
+
+                        if (undefined !== attrs.periods) {
+                            $parse(attrs.periods).assign(scope, selection.getValidPeriods());
+                        }
                     }
 
 

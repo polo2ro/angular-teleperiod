@@ -42,11 +42,11 @@
 
 
             <div tp-teleperiod>
-                <tp-period-picker workingtimes="loadWorkingTimes" events="loadEvents" dtstart="selected.dtstart" dtend="selected.dtend"></tp-period-picker>
+                <tp-period-picker workingtimes="loadWorkingTimes" events="loadEvents" dtstart="selected.dtstart" dtend="selected.dtend" periods="selected.periods"></tp-period-picker>
                 <tp-timeline name="Scolar vacations" events="loadVacationsPreview"></tp-timeline>
             </div>
 
-            <form name="selection" role="form">
+            <form name="selection" role="form" class="col-md-6">
                 <h3>Selection</h3>
 
                 <div class="form-inline  form-group">
@@ -70,6 +70,14 @@
                 </div>
 
             </form>
+
+            <div class="col-md-6">
+                <h3>Selected periods</h3>
+
+                <ul>
+                    <li ng-repeat="period in selected.periods">From {{period.dtstart|date:'short'}} to {{period.dtend|date:'short'}}</li>
+                </ul>
+            </div>
 
         </div>
 
