@@ -49,9 +49,38 @@ app.controller('MainCtrl', function($scope) {
     }
 
 
+    $scope.event = {
+        uid: 'abc123455',
+        summary: 'Special meeting',
+        dtstart: new Date(2015, 8, 29, 8, 0, 0),
+        dtend: new Date(2015, 8, 29, 18, 0, 0)
+    };
+
+
 
     $scope.loadEvents = function(interval) {
-        return [];
+
+        if (interval.to.getFullYear() < 2015 || interval.from.getFullYear() > 2015) {
+            return [];
+        }
+
+        if (interval.to.getMonth() < 8 || interval.from.getMonth() > 8) {
+            return [];
+        }
+
+        return [{
+            uid: 'abc123456',
+            summary: 'Special meeting',
+            dtstart: new Date(2015, 8, 20, 8, 0, 0),
+            dtend: new Date(2015, 8, 20, 18, 0, 0)
+        },
+        {
+            uid: 'abc123457',
+            summary: 'Sport',
+            dtstart: new Date(2015, 8, 21, 8, 0, 0),
+            dtend: new Date(2015, 8, 21, 12, 0, 0)
+        },
+        $scope.event];
     };
 
     $scope.loadVacationsPreview = function(interval) {

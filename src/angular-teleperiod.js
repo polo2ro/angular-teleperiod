@@ -60,7 +60,17 @@
 
                     teleperiodScope.d3Svg = d3.select(scope.svg[0]);
                     scope.focusDate = attrs.focusDate || new Date();
+                    var selectedEventId = null;
 
+
+
+                    if (undefined !== attrs.selectedevent) {
+
+                        var selectedEvent = $parse(attrs.selectedevent)(scope);
+                        if (undefined !== selectedEvent && undefined !== selectedEvent.uid) {
+                            selectedEventId = selectedEvent.uid;
+                        }
+                    }
 
                     function updateScope(selection) {
                         $parse(attrs.dtstart).assign(scope, selection.dtstart);
@@ -75,7 +85,7 @@
                     teleperiodScope.teleperiod = new Teleperiod({
                         object: teleperiodScope.d3Svg,
                         focusDate: scope.focusDate,
-
+                        selectedEvent: selectedEventId,
                         workingtimes: function(interval) {
                             return teleperiodScope.getPromisedData(attrs.workingtimes, interval);
                         },
