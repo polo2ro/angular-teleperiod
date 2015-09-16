@@ -48,12 +48,30 @@ app.controller('MainCtrl', function($scope) {
         }
     }
 
+    $scope.events = [{
+            uid: 'abc123456',
+            summary: 'Special meeting',
+            dtstart: new Date(2015, 8, 20, 8, 0, 0),
+            dtend: new Date(2015, 8, 20, 18, 0, 0)
+        },
+        {
+            uid: 'abc123457',
+            summary: 'Sport',
+            dtstart: new Date(2015, 8, 21, 8, 0, 0),
+            dtend: new Date(2015, 8, 21, 12, 0, 0)
+        },
+        {
+            uid: 'abc123455',
+            summary: 'Social event',
+            dtstart: new Date(2015, 8, 29, 8, 0, 0),
+            dtend: new Date(2015, 8, 29, 18, 0, 0)
+        }];
 
-    $scope.event = {
-        uid: 'abc123455',
-        summary: 'Special meeting',
-        dtstart: new Date(2015, 8, 29, 8, 0, 0),
-        dtend: new Date(2015, 8, 29, 18, 0, 0)
+
+    $scope.editEvent = function(event) {
+        $scope.event = event;
+        //TODO focus date
+        //TODO dynamic version for edit event
     };
 
 
@@ -68,19 +86,7 @@ app.controller('MainCtrl', function($scope) {
             return [];
         }
 
-        return [{
-            uid: 'abc123456',
-            summary: 'Special meeting',
-            dtstart: new Date(2015, 8, 20, 8, 0, 0),
-            dtend: new Date(2015, 8, 20, 18, 0, 0)
-        },
-        {
-            uid: 'abc123457',
-            summary: 'Sport',
-            dtstart: new Date(2015, 8, 21, 8, 0, 0),
-            dtend: new Date(2015, 8, 21, 12, 0, 0)
-        },
-        $scope.event];
+        return $scope.events;
     };
 
     $scope.loadVacationsPreview = function(interval) {
