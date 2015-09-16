@@ -75,6 +75,16 @@ app.controller('MainCtrl', function($scope) {
     };
 
 
+    $scope.addOneEvent = function() {
+        $scope.events.push({
+            uid: 'abc123454',
+            summary: 'Break',
+            dtstart: new Date(2015, 8, 30, 14, 0, 0),
+            dtend: new Date(2015, 8, 30, 15, 0, 0)
+        });
+    };
+
+
 
     $scope.loadEvents = function(interval) {
 
