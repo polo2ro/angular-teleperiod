@@ -63,7 +63,6 @@
                     var selectedEventId = null;
 
 
-
                     if (undefined !== attrs.selectedevent) {
 
                         var selectedEvent = $parse(attrs.selectedevent)(scope);
@@ -102,6 +101,16 @@
                     });
 
                     setTimeout(teleperiodScope.teleperiod.draw, 0);
+                    
+                    
+                    scope.$watch(attrs.refreshevents, function(newValue) {
+
+                        if (newValue) {
+                            teleperiodScope.teleperiod.refreshEvents();
+                        }
+                        
+                        scope[attrs.refreshevents] = false;
+                    }, true);
 
 
                     scope.$watch(attrs.dtstart, function(newValue) {

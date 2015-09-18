@@ -74,14 +74,24 @@ app.controller('MainCtrl', function($scope) {
         //TODO dynamic version for edit event
     };
 
+    var more = 0;
 
     $scope.addOneEvent = function() {
+        
+        var dtstart = new Date(2015, 8, 30, 14, 0, 0);
+        var dtend = new Date(2015, 8, 30, 15, 0, 0);
+        
         $scope.events.push({
-            uid: 'abc123454',
             summary: 'Break',
-            dtstart: new Date(2015, 8, 30, 14, 0, 0),
-            dtend: new Date(2015, 8, 30, 15, 0, 0)
+            dtstart: dtstart,
+            dtend: dtend
         });
+        
+        dtstart.setDate(more+dtstart.getDate());
+        dtend.setDate(more+dtend.getDate());
+        
+        more++;
+        $scope.refresh = true;
     };
 
 
