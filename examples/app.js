@@ -71,7 +71,6 @@ app.controller('MainCtrl', function($scope) {
     $scope.editEvent = function(event) {
         $scope.event = event;
         //TODO focus date
-        //TODO dynamic version for edit event
     };
 
     var more = 0;
@@ -82,6 +81,7 @@ app.controller('MainCtrl', function($scope) {
         var dtend = new Date(2015, 8, 30, 15, 0, 0);
         
         $scope.events.push({
+            uid: 'dyn0'+more,
             summary: 'Break',
             dtstart: dtstart,
             dtend: dtend

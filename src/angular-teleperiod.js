@@ -135,6 +135,26 @@
                         }
                     }, true);
 
+
+                    scope.$watch(attrs.selectedevent, function(newValue) {
+
+                        if (undefined === newValue) {
+                            return;
+                        }
+
+                        var eventId = null;
+                        if (typeof newValue === 'string') {
+                            eventId = newValue;
+                        } else if(undefined === newValue.uid) {
+                            throw new Error('Selected event need a uid property');
+                        } else {
+                            eventId = newValue.uid;
+                        }
+
+                        teleperiodScope.teleperiod.editEvent(eventId);
+
+                    }, true);
+
                 };
 
             }
