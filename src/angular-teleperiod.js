@@ -60,14 +60,21 @@
 
                     teleperiodScope.d3Svg = d3.select(scope.svg[0]);
                     scope.focusDate = attrs.focusDate || new Date();
-                    var selectedEventId = null;
+                    var selectedEvents = [];
 
 
-                    if (undefined !== attrs.selectedevent) {
+                    if (undefined !== attrs.selectedevents) {
 
-                        var selectedEvent = $parse(attrs.selectedevent)(scope);
-                        if (undefined !== selectedEvent && undefined !== selectedEvent.uid) {
-                            selectedEventId = selectedEvent.uid;
+                        var eventList = $parse(attrs.selectedevents)(scope);
+                        if (undefined !== eventList) {
+                            eventList.forEach(function(evt) {
+                                if (typeof evt === 'string') {
+                                    selectedEvents.push(evt);
+                                } else if (undefined !== evt.uid) {
+                                    selectedEvents.push(evt.uid);
+                                }
+
+                            });
                         }
                     }
 
@@ -84,7 +91,7 @@
                     teleperiodScope.teleperiod = new Teleperiod({
                         object: teleperiodScope.d3Svg,
                         focusDate: scope.focusDate,
-                        selectedEvent: selectedEventId,
+                        selectedEvents: selectedEvents,
                         workingtimes: function(interval) {
                             return teleperiodScope.getPromisedData(attrs.workingtimes, interval);
                         },
@@ -136,22 +143,28 @@
                     }, true);
 
 
-                    scope.$watch(attrs.selectedevent, function(newValue) {
+                    scope.$watch(attrs.selectedevents, function(newValue) {
 
                         if (undefined === newValue) {
                             return;
                         }
 
-                        var eventId = null;
-                        if (typeof newValue === 'string') {
-                            eventId = newValue;
-                        } else if(undefined === newValue.uid) {
-                            throw new Error('Selected event need a uid property');
-                        } else {
-                            eventId = newValue.uid;
-                        }
+                        var editList = [];
+                        newValue.forEach(function(evt) {
+                            var eventId = null;
+                            if (typeof evt === 'string') {
+                                eventId = evt;
+                            } else if(undefined === evt.uid) {
+                                throw new Error('Selected events need a uid property');
+                            } else {
+                                eventId = evt.uid;
+                            }
 
-                        teleperiodScope.teleperiod.editEvent(eventId);
+                            editList.push(eventId);
+                        });
+
+
+                        teleperiodScope.teleperiod.editEvents(editList);
 
                     }, true);
 

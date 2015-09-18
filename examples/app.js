@@ -69,7 +69,7 @@ app.controller('MainCtrl', function($scope) {
 
 
     $scope.editEvent = function(event) {
-        $scope.event = event;
+        $scope.selectedevents = [event];
         //TODO focus date
     };
 
