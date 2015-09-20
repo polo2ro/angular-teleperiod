@@ -95,6 +95,10 @@ app.controller('MainCtrl', function($scope) {
     };
 
 
+    $scope.setReady = function() {
+        $scope.ready = true;
+    };
+
 
     $scope.loadEvents = function(interval) {
 

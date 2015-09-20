@@ -42,7 +42,7 @@
 
 
             <div tp-teleperiod>
-                <tp-period-picker workingtimes="loadWorkingTimes" events="loadEvents" refreshevents="refresh" dtstart="selected.dtstart" dtend="selected.dtend" selectedevents="selectedevents" periods="selected.periods"></tp-period-picker>
+                <tp-period-picker ready="ready" workingtimes="loadWorkingTimes" events="loadEvents" refreshevents="refresh" dtstart="selected.dtstart" dtend="selected.dtend" selectedevents="selectedevents" periods="selected.periods"></tp-period-picker>
                 <tp-timeline name="Scolar vacations" events="loadVacationsPreview"></tp-timeline>
             </div>
 
@@ -88,6 +88,8 @@
                 </ul>
 
                 <button ng-click="addOneEvent()" class="btn btn-default">Add one event</button>
+
+                <button ng-click="setReady()" class="btn btn-default">Set ready</button>
             </div>
 
         </div>

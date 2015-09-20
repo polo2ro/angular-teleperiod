@@ -36,7 +36,7 @@ A scope property to update with the start date of the selection
 A scope property to update with the end date of the selection
 
 `ready`:
-Load teleperiod if ready=true
+If attribute is set, draw the period picker when ready=true
 
 `periods`:
 Optional property to update with the list of selected periods

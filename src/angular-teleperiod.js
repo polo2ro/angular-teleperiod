@@ -57,6 +57,9 @@
 
                 return function compile(scope, iElement, attrs, teleperiodScope) {
 
+                    if (undefined === attrs.ready) {
+                        attrs.ready = 'true';
+                    }
 
                     teleperiodScope.d3Svg = d3.select(scope.svg[0]);
                     scope.focusDate = attrs.focusDate || new Date();
@@ -88,6 +91,7 @@
                     }
 
 
+
                     teleperiodScope.teleperiod = new Teleperiod({
                         object: teleperiodScope.d3Svg,
                         focusDate: scope.focusDate,
@@ -107,7 +111,15 @@
                         }
                     });
 
-                    setTimeout(teleperiodScope.teleperiod.draw, 0);
+
+
+
+                    scope.$watch(attrs.ready, function(newValue) {
+                        if (true === newValue) {
+                            teleperiodScope.teleperiod.draw();
+                        }
+                    }, true);
+
                     
                     
                     scope.$watch(attrs.refreshevents, function(newValue) {
