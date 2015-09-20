@@ -35,8 +35,17 @@ A scope property to update with the start date of the selection
 `dtend`:
 A scope property to update with the end date of the selection
 
+`ready`:
+Load teleperiod if ready=true
+
 `periods`:
 Optional property to update with the list of selected periods
+
+`selectedevents`:
+Optional list of events to replace with a selection
+
+`refreshevents`:
+Set this value to "true" to force a reload of all events
 
 
 __On a tp-timeline tag__
