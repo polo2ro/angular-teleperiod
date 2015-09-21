@@ -42,6 +42,9 @@
                     return deferred.promise;
                 };
 
+
+                this.timelines = [];
+
             }
         };
     })
@@ -116,6 +119,9 @@
                         });
 
 
+                        teleperiodScope.timelines.forEach(function(timeline) {
+                            teleperiodScope.teleperiod.addTimeLine(timeline);
+                        });
                     }
 
 
@@ -215,8 +221,12 @@
                     return teleperiodScope.getPromisedData(attrs.events, interval);
                 });
 
-                teleperiodScope.teleperiod.addTimeLine(timeline);
-                // teleperiodScope.teleperiod.draw();
+                if (undefined === teleperiodScope.teleperiod) {
+                    teleperiodScope.timelines.push(timeline);
+                } else {
+                    teleperiodScope.teleperiod.addTimeLine(timeline);
+                }
+
             }
         };
     });
