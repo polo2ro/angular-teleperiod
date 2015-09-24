@@ -49,7 +49,7 @@
         };
     })
 
-    .directive('tpPeriodPicker', function($parse) {
+    .directive('tpPeriodPicker', function($parse, $q) {
 
         return {
             restrict: 'E',
@@ -64,29 +64,18 @@
                         attrs.ready = 'true';
                     }
 
+                    var deferredSelectedEventsAttribute = $q.defer();
+                    var selectedEventsPromise = deferredSelectedEventsAttribute.promise;
 
-                    function initTeleperiod()
+                    /**
+                     * @param {Array} editList optional list of event uid
+                     */
+                    function initTeleperiod(editList)
                     {
 
                         teleperiodScope.d3Svg = d3.select(scope.svg[0]);
                         scope.focusDate = attrs.focusDate || new Date();
-                        var selectedEvents = [];
 
-
-                        if (undefined !== attrs.selectedevents) {
-
-                            var eventList = $parse(attrs.selectedevents)(scope);
-                            if (undefined !== eventList) {
-                                eventList.forEach(function(evt) {
-                                    if (typeof evt === 'string') {
-                                        selectedEvents.push(evt);
-                                    } else if (undefined !== evt.uid) {
-                                        selectedEvents.push(evt.uid);
-                                    }
-
-                                });
-                            }
-                        }
 
                         function updateScope(selection) {
                             $parse(attrs.dtstart).assign(scope, selection.dtstart);
@@ -102,7 +91,7 @@
                         teleperiodScope.teleperiod = new Teleperiod({
                             object: teleperiodScope.d3Svg,
                             focusDate: scope.focusDate,
-                            selectedEvents: selectedEvents,
+                            selectedEvents: editList,
                             workingtimes: function(interval) {
                                 return teleperiodScope.getPromisedData(attrs.workingtimes, interval);
                             },
@@ -127,8 +116,13 @@
 
                     scope.$watch(attrs.ready, function(newValue) {
                         if (true === newValue) {
-                            initTeleperiod();
-                            teleperiodScope.teleperiod.draw();
+
+                            // once ready is true, wait for the resolution of the selectedevents attribute before starting
+
+                            selectedEventsPromise.then(function(editList) {
+                                initTeleperiod(editList);
+                                teleperiodScope.teleperiod.draw();
+                            });
                         }
                     }, true);
 
@@ -178,10 +172,7 @@
                     scope.$watch(attrs.selectedevents, function(newValue) {
 
                         if (undefined === newValue) {
-                            return;
-                        }
-
-                        if ( undefined === teleperiodScope.teleperiod) {
+                            //deferredSelectedEventsAttribute.resolve();
                             return;
                         }
 
@@ -198,6 +189,11 @@
 
                             editList.push(eventId);
                         });
+
+                        if (undefined === teleperiodScope.teleperiod) {
+                            deferredSelectedEventsAttribute.resolve(editList);
+                            return;
+                        }
 
 
                         teleperiodScope.teleperiod.editEvents(editList);
