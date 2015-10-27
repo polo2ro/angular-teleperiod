@@ -47,6 +47,12 @@ Optional list of events to replace with a selection
 `refreshevents`:
 Set this value to "true" to force a reload of all events
 
+`dayFirstMinute`:
+Set the first minute of the day, default is 7x60 and day start at 7:00am
+
+`dayLastMinute`:
+Set the last minute of the day, default is 20x60 and day end at 8:00pm
+
 
 __On a tp-timeline tag__
 

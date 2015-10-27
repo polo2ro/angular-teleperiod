@@ -60,9 +60,7 @@
 
                 return function compile(scope, iElement, attrs, teleperiodScope) {
 
-                    if (undefined === attrs.ready) {
-                        attrs.ready = 'true';
-                    }
+
 
                     var deferredSelectedEventsAttribute = $q.defer();
                     var selectedEventsPromise = deferredSelectedEventsAttribute.promise;
@@ -96,7 +94,7 @@
 
 
 
-                        teleperiodScope.teleperiod = new Teleperiod({
+                        var options = {
                             object: teleperiodScope.d3Svg,
                             focusDate: focusDate,
                             selectedEvents: editList,
@@ -113,7 +111,21 @@
                                     updateScope(selection);
                                 });
                             }
-                        });
+                        };
+
+
+                        if (undefined !== attrs.dayfirstminute) {
+                            options.dayFirstMinute = $parse(attrs.dayfirstminute)(scope);
+                        }
+
+
+                        if (undefined !== attrs.daylastminute) {
+                            options.dayLastMinute = $parse(attrs.daylastminute)(scope);
+                        }
+
+                        console.log(options.dayLastMinute);
+
+                        teleperiodScope.teleperiod = new Teleperiod(options);
 
 
                         teleperiodScope.timelines.forEach(function(timeline) {
@@ -122,11 +134,9 @@
                     }
 
 
+                    // once ready is true, wait for the resolution of the selectedevents attribute before starting
                     scope.$watch(attrs.ready, function(newValue) {
-                        if (true === newValue) {
-
-                            // once ready is true, wait for the resolution of the selectedevents attribute before starting
-
+                        if (true === newValue || undefined === newValue) {
                             selectedEventsPromise.then(function(editList) {
                                 initTeleperiod(editList);
                                 teleperiodScope.teleperiod.draw();
@@ -180,7 +190,7 @@
                     scope.$watch(attrs.selectedevents, function(newValue) {
 
                         if (undefined === newValue) {
-                            //deferredSelectedEventsAttribute.resolve();
+                            deferredSelectedEventsAttribute.resolve();
                             return;
                         }
 
