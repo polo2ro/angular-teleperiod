@@ -123,7 +123,6 @@
                             options.dayLastMinute = $parse(attrs.daylastminute)(scope);
                         }
 
-                        console.log(options.dayLastMinute);
 
                         teleperiodScope.teleperiod = new Teleperiod(options);
 
