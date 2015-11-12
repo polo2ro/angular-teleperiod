@@ -34,7 +34,7 @@
 
                     var fn = $scope[method];
                     if (fn === undefined) {
-                        deferred.reject();
+                        deferred.reject('method '+method+' not found in scope');
                     } else {
                         deferred.resolve(fn(interval));
                     }
