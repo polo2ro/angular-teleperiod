@@ -31,10 +31,15 @@
                  */
                 this.getPromisedData = function getPromisedData(method, interval) {
                     var deferred = Q.defer();
+                    var directive = this;
 
                     var fn = $scope[method];
                     if (fn === undefined) {
-                        deferred.reject('method '+method+' not found in scope');
+                        // wait for scope availability ???
+                        setTimeout(function() {
+                            deferred.resolve(directive.getPromisedData(method, interval));
+                        },200);
+                        //deferred.reject('method '+method+' not found in scope');
                     } else {
                         deferred.resolve(fn(interval));
                     }
