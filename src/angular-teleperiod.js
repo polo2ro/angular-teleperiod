@@ -204,13 +204,22 @@
                             if (typeof evt === 'string') {
                                 eventId = evt;
                             } else if(undefined === evt.uid) {
-                                throw new Error('Selected events need a uid property');
+                                // No UID, the event can be set in selection before saving
+                                // we do not edit events if this is the case
+                                return;
+                                //throw new Error('Selected events need a uid property');
                             } else {
                                 eventId = evt.uid;
                             }
 
                             editList.push(eventId);
                         });
+
+                        if (editList.length === 0) {
+                            deferredSelectedEventsAttribute.resolve();
+                            return;
+                        }
+
 
                         if (undefined === teleperiodScope.teleperiod) {
                             deferredSelectedEventsAttribute.resolve(editList);
