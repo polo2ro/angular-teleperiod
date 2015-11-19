@@ -2,7 +2,7 @@
   "name": "angular-teleperiod",
   "dependencies": {
     "angular": "1.3.13",
-    "teleperiod": "#e695335dd02215082b9b389e2ceb7efd7fde493c"
+    "teleperiod": "#cc7df43dbaec5d0312711f64bde57e416eb961e3"
   },
   "devDependencies": {
     "bootstrap": "~3.2.0",
