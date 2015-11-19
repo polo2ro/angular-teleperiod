@@ -206,8 +206,14 @@
                             } else if(undefined === evt.uid) {
                                 // No UID, the event can be set in selection before saving
                                 // we do not edit events if this is the case
+
+                                if (console !== undefined) {
+                                    console.log('Selected events need a uid property');
+                                    console.log(evt);
+                                }
+
                                 return;
-                                //throw new Error('Selected events need a uid property');
+
                             } else {
                                 eventId = evt.uid;
                             }
