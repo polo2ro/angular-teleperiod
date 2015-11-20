@@ -4,6 +4,11 @@ This project is an agular wrapper for the main projet [teleperiod](https://githu
 
 ![Preview](/examples/screenshot.png?raw=true)
 
+Demo
+----
+
+http://www.rosanbo.com/angular-teleperiod/examples/
+
 
 Directives
 ----------
