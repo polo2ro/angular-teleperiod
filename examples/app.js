@@ -67,6 +67,8 @@ app.controller('MainCtrl', function($scope) {
             dtend: new Date(2015, 8, 29, 18, 0, 0)
         }];
 
+    $scope.focus = $scope.events[0].dtstart;
+
 
     $scope.editEvent = function(event) {
         $scope.selectedevents = [event];
