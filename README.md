@@ -66,3 +66,7 @@ The name displayed on the timeline.
 
 `events`:
 A scope function used to create the events on the timeline
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/polo2ro/angular-teleperiod/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
