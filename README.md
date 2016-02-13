@@ -66,3 +66,5 @@ The name displayed on the timeline.
 
 `events`:
 A scope function used to create the events on the timeline
+
+
