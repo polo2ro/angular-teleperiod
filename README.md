@@ -1,6 +1,6 @@
-# angular-teleperiod
-A period picker on a time line with working hours embeded in an angular directive.
-This project is an agular wrapper for the main projet [teleperiod](https://github.com/polo2ro/teleperiod)
+# Angular-teleperiod
+A period picker on a time line with working hours embeded in an Angular directive.
+This project is an Angular wrapper for the main projet [teleperiod](https://github.com/polo2ro/teleperiod)
 
 ![Preview](/examples/screenshot.png?raw=true)
 
