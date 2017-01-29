@@ -75,6 +75,9 @@
                      */
                     function initTeleperiod(editList)
                     {
+                        if (teleperiodScope.d3Svg) {
+                            return;
+                        }
 
                         teleperiodScope.d3Svg = d3.select(scope.svg[0]);
 
@@ -128,7 +131,6 @@
                             options.dayLastMinute = $parse(attrs.daylastminute)(scope);
                         }
 
-
                         teleperiodScope.teleperiod = new Teleperiod(options);
 
 
@@ -148,14 +150,14 @@
                         }
                     }, true);
 
-                    
-                    
+
+
                     scope.$watch(attrs.refreshevents, function(newValue) {
 
                         if (newValue && undefined !== teleperiodScope.teleperiod) {
                             teleperiodScope.teleperiod.refreshEvents();
                         }
-                        
+
                         scope[attrs.refreshevents] = false;
                     }, true);
 
