@@ -65,6 +65,13 @@ app.controller('MainCtrl', function($scope) {
             summary: 'Social event',
             dtstart: new Date(2015, 8, 29, 8, 0, 0),
             dtend: new Date(2015, 8, 29, 18, 0, 0)
+        },
+        {
+            uid: 'nonworkingdemo',
+            summary: 'Day off',
+            dtstart: new Date(2015, 9, 6, 0, 0, 0),
+            dtend: new Date(2015, 9, 6, 23, 59, 59),
+            categories: ['nonworking']
         }];
 
     $scope.focus = $scope.events[0].dtstart;
@@ -78,20 +85,20 @@ app.controller('MainCtrl', function($scope) {
     var more = 0;
 
     $scope.addOneEvent = function() {
-        
+
         var dtstart = new Date(2015, 8, 30, 14, 0, 0);
         var dtend = new Date(2015, 8, 30, 15, 0, 0);
-        
+
         $scope.events.push({
             uid: 'dyn0'+more,
             summary: 'Break',
             dtstart: dtstart,
             dtend: dtend
         });
-        
+
         dtstart.setDate(more+dtstart.getDate());
         dtend.setDate(more+dtend.getDate());
-        
+
         more++;
         $scope.refresh = true;
     };
