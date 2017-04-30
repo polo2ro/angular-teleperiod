@@ -4,10 +4,6 @@ This project is an Angular wrapper for the main projet [teleperiod](https://gith
 
 ![Preview](/examples/screenshot.png?raw=true)
 
-Demo
-----
-
-http://www.rosanbo.com/angular-teleperiod/examples/
 
 
 Directives
@@ -66,5 +62,3 @@ The name displayed on the timeline.
 
 `events`:
 A scope function used to create the events on the timeline
-
-
