@@ -133,7 +133,7 @@
                         }
 
                         if (undefined !== attrs.options) {
-                            let extendOptions = $parse(attrs.options)(scope);
+                            var extendOptions = $parse(attrs.options)(scope);
                             options = angular.merge(option, extendOptions);
                         }
 
