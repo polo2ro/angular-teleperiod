@@ -106,6 +106,7 @@
                             object: teleperiodScope.d3Svg,
                             focusDate: focusDate,
                             selectedEvents: editList,
+                            dateLocale: 'en-US',
                             workingtimes: function(interval) {
                                 return teleperiodScope.getPromisedData(attrs.workingtimes, interval);
                             },
@@ -129,6 +130,11 @@
 
                         if (undefined !== attrs.daylastminute) {
                             options.dayLastMinute = $parse(attrs.daylastminute)(scope);
+                        }
+
+                        if (undefined !== attrs.options) {
+                            let extendOptions = $parse(attrs.options)(scope);
+                            options = angular.merge(option, extendOptions);
                         }
 
                         teleperiodScope.teleperiod = new Teleperiod(options);
