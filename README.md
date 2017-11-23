@@ -63,6 +63,8 @@ Set the first minute of the day, default is 7x60 and day start at 7:00am
 `dayLastMinute`:
 Set the last minute of the day, default is 20x60 and day end at 8:00pm
 
+`options`:
+The attribute can be used to change options from [teleperiod](https://github.com/polo2ro/teleperiod) 
 
 __On a tp-timeline tag__
 
