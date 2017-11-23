@@ -5,6 +5,15 @@ This project is an Angular wrapper for the main projet [teleperiod](https://gith
 ![Preview](/examples/screenshot.png?raw=true)
 
 
+Install
+----------
+
+Bower:
+
+```shell
+bower install angular-teleperiod --save
+```
+
 
 Directives
 ----------
