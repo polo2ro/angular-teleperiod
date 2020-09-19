@@ -134,7 +134,7 @@
 
                         if (undefined !== attrs.options) {
                             var extendOptions = $parse(attrs.options)(scope);
-                            options = angular.merge(option, extendOptions);
+                            options = angular.merge(options, extendOptions);
                         }
 
                         teleperiodScope.teleperiod = new Teleperiod(options);
@@ -180,6 +180,7 @@
                             selection.dtstart = newValue;
                             selection.removeOverlay();
                             selection.highlightPeriods();
+                            $parse(attrs.periods).assign(scope, selection.getValidPeriods());
                         }
                     }, true);
 
@@ -195,6 +196,7 @@
                             selection.dtend = newValue;
                             selection.removeOverlay();
                             selection.highlightPeriods();
+                            $parse(attrs.periods).assign(scope, selection.getValidPeriods());
                         }
                     }, true);
 
